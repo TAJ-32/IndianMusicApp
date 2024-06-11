@@ -1,59 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { authenticate, getHashParams, setAccessToken, getSpotifyApi } from './spotify';
+import React, { useEffect, useState } from 'react'; //useEffect
+//import TopArtists from './components/TopArtists';
+import Home from './components/Home.js';
+import './App.css'
+import Login from './components/Login.js';
+//import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-const clientId = '15a7c37cb874416fa0e4a9580f29435e';
-const redirectUri = 'http://localhost:3000';
+//const clientId = '15a7c37cb874416fa0e4a9580f29435e';
+//const redirectUri = 'http://localhost:3000';
 
 function App() {
-  const [token, setToken] = useState(null);
-  const [playlists, setPlaylists] = useState([]);
-  const [myData, setMyData] = useState(null);
 
-  useEffect(() => {
-    const params = getHashParams();
-    const token = params.access_token;
-    if (token) {
-      setAccessToken(token);
-      setToken(token);
-    } else {
-      authenticate(clientId, redirectUri);
-    }
-  }, []);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [LoggedIn, setLoggedIn] = useState(false);
 
-  useEffect(() => {
-    if (token) {
-      getSpotifyApi().getUserPlaylists()
-        .then(response => {
-          setPlaylists(response.items);
-        });
-    }
-  }, [token]);
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/mydata')
-      .then(response => {
-        setMyData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data from Python backend:', error);
-      });
-  }, []);
+  // useEffect (() => {
+  //   setEmail("sartajs2002@gmail.com");
+  //   setLoggedIn(true);
+  // }, []);
 
   return (
-    <div>
-      {token ? (
-        <div>
-          <h1>Your Playlists</h1>
-          <ul>
-            {playlists.map(playlist => (
-              <li key={playlist.id}>{playlist.name}</li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <p>Loading Spotify data...</p>
-      )}
+    <div className="App">
+      <Home email={email} LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} />
+    </div>
+
+
+  )
+}
+
+export default App;
+
+
+
+/*
+
+      <Login 
+        LoggedIn={LoggedIn}
+        setLoggedIn={setLoggedIn}
+      />
+      <div>
+
+      </div>
+
+
+
+        {token ? (
+          <div>
+            <h1>Hello {username}!</h1>
+            <TopArtists accessToken={token} />
+          </div>
+        ) : (
+          <p>Loading Spotify data...</p>
+        )}
+
+
 
       {myData ? (
         <div>
@@ -63,8 +63,4 @@ function App() {
       ) : (
         <p>Loading my data...</p>
       )}
-    </div>
-  );
-}
-
-export default App;
+*/
