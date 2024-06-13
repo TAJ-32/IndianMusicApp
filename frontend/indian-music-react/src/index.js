@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'; 
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -6,15 +6,18 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import App from "../src/pages/App.js"
 import Home from "../src/pages/Home.js"
 import Login from "../src/pages/Login.js"
-import Layout from "../src/pages/Layout.js"
 
-export default function MyApp() {
+function MyApp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [LoggedIn, setLoggedIn] = useState(false);
+
   return (
     <Router>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
+          <Route index element={<Home LoggedIn={LoggedIn} email={email} setLoggedIn={setLoggedIn} />} />
+          <Route path="login" element={<Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn}/>} />
         </Route>
       </Routes>
     </Router>

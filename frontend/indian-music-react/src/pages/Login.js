@@ -6,9 +6,13 @@ function Login ({ LoggedIn, setLoggedIn}) {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const navigate = useNavigate();
 
     const onButtonClick = () => {
-        
+        if (email && password) {
+            setLoggedIn(true);
+            navigate('/');
+        }
     }
 
     return (
