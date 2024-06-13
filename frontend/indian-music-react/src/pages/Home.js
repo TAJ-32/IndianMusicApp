@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Login from './Login';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-function Home({ LoggedIn, email, setLoggedIn }) {
+function Home({ LoggedIn, email, setLoggedIn, setEmail }) {
   const navigate = useNavigate();
 
   const onEmailClick = () => {
@@ -24,7 +24,7 @@ function Home({ LoggedIn, email, setLoggedIn }) {
   return (
     <div className="mainContainer">
       <div className={'titleContainer'}>
-        {LoggedIn ? <h2>HIIII</h2> : <h2>Log In!</h2>}
+        {LoggedIn ? <h2>Welcome {email}!</h2> : <h2>Log In!</h2>}
       </div>
       <br />
       <div className={'buttonContainer'}>

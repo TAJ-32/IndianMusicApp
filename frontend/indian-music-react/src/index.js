@@ -9,15 +9,15 @@ import Login from "../src/pages/Login.js"
 
 function MyApp() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+//  const [password, setPassword] = useState("");
   const [LoggedIn, setLoggedIn] = useState(false);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<Home LoggedIn={LoggedIn} email={email} setLoggedIn={setLoggedIn} />} />
-          <Route path="login" element={<Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn}/>} />
+          <Route index element={<Home LoggedIn={LoggedIn} email={email} setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
+          <Route path="login" element={<Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail}/>} />
         </Route>
       </Routes>
     </Router>
