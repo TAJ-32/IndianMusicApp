@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import App from "../src/pages/App.js"
 import Home from "../src/pages/Home.js"
 import Login from "../src/pages/Login.js"
+import SpotifyLogin from "../src/pages/SpotifyLogin.js"
 
 function MyApp() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,8 @@ function MyApp() {
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home LoggedIn={LoggedIn} email={email} setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
-          <Route path="login" element={<Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail}/>} />
+          <Route path="login" element={<Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} />} />
+          <Route path="login_spotify" element={<SpotifyLogin LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} />} />
         </Route>
       </Routes>
     </Router>

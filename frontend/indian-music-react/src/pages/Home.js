@@ -18,6 +18,14 @@ function Home({ LoggedIn, email, setLoggedIn, setEmail }) {
   };
 
   const onSpotifyClick = () => {
+    if (LoggedIn) {
+      // Log out logic
+      setLoggedIn(false);
+      navigate('/'); // Navigate to Home after logging out
+    } else {
+      // Navigate to Login page
+      navigate('/login_spotify');
+    }
     // You'll update this function later
   }
 
