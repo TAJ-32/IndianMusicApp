@@ -10,9 +10,8 @@ function Login ({ LoggedIn, setLoggedIn, email, setEmail, username, setUsername}
     const onButtonClick = () => {
         if (email && password) {
             setLoggedIn(true);
-            const temp = email.split('@')[0];
-            //setUsername(temp);
-            navigate('/');
+            const temp = email.split('@')[0]; //sets the username to the email user if they haven't logged in with Spotify
+            navigate('/'); //redirect back to home page
         }
     }
 

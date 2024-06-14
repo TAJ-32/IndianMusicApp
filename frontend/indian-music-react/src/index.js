@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useState } from 'react'; 
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -9,10 +9,19 @@ import Login from "../src/pages/Login.js"
 import SpotifyLogin from "../src/pages/SpotifyLogin.js"
 
 function MyApp() {
+  /*
+  This sets up React state props that will need to be passed to the Home screen. 
+  Will probably have to have more because the Home page is essentially going to be the parent
+  To all of the pages
+  */
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [LoggedIn, setLoggedIn] = useState(false);
 
+  /*
+    sets up the navigation routes so that when you navigate(path) it just renders these components as specified here.
+    So navigate('/login' will render the Login component with all the props listed there)
+  */
   return (
     <Router>
       <Routes>
