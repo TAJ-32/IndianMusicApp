@@ -10,16 +10,16 @@ import SpotifyLogin from "../src/pages/SpotifyLogin.js"
 
 function MyApp() {
   const [email, setEmail] = useState("");
-//  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [LoggedIn, setLoggedIn] = useState(false);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<Home LoggedIn={LoggedIn} email={email} setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
-          <Route path="login" element={<Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} />} />
-          <Route path="login_spotify" element={<SpotifyLogin LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} />} />
+          <Route index element={<Home LoggedIn={LoggedIn} email={email} username={username} setLoggedIn={setLoggedIn} setEmail={setEmail} setUsername={setUsername}/>} />
+          <Route path="login" element={<Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} username={username} setUsername={setUsername}/>} />
+          <Route path="login_spotify" element={<SpotifyLogin LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail}/>} />
         </Route>
       </Routes>
     </Router>

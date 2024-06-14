@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; //useEffect
+import React, { useEffect, useState, useCallback } from 'react'; //useEffect
 import axios from 'axios';
 import { authenticate, getHashParams, setAccessToken, getSpotifyApi } from '../spotify.js';
 import { BrowserRouter as Router, Route, Routes, useNavigate, Outlet } from 'react-router-dom'
@@ -13,54 +13,76 @@ function SpotifyLogin(LoggedIn, setLoggedIn, email, setEmail) {
 
   const navigate = useNavigate();
 
-  const onLogin = () => {
-    if (LoggedIn) {
-      // Log out logic
-      navigate('/'); // Navigate to Home after logging out
-    } else {
-      // Navigate to Login page
-      navigate('/login');
-    }
-    // You'll update this function later
-  };
-
   useEffect(() => {
-    const params = getHashParams();
-    const token = params.access_token;
-    if (token) {
-      setAccessToken(token);
-      setToken(token);
-    } else {
-      authenticate(clientId, redirectUri);
-    }
-  }, []);
+    authenticate(clientId, redirectUri);
+  })
 
-  useEffect(() => {
-    if (token) {
-      getSpotifyApi().getUserPlaylists()
-        .then(response => {
-          setLoggedIn(true);
-          setEmail(getSpotifyApi().getUser());
-          setPlaylists(response.items);
-        });
-    }
-  }, [token, LoggedIn, setLoggedIn, setEmail]);
+  // useEffect(() => {
+  //   if (token) {
+  //     getSpotifyApi().getUserPlaylists()
+  //       .then(response => {
+  //         setLoggedIn(true);
+  //         setEmail(getSpotifyApi().getUser());
+  //         setPlaylists(response.items);
+  //       });
+  //   }
+  // }, [token, LoggedIn, setLoggedIn, setEmail]);
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/mydata')
       .then(response => {
         setMyData(response.data);
+        console.log("Data: ",  myData);
       })
       .catch(error => {
         console.error('Error fetching data from Python backend:', error);
       });
-  }, []);
+  }, [myData]);
+
+
 
   return (
     <div>
-      {onLogin}
+      {/* {onLogin} */}
     </div>
   );
 }
 
 export default SpotifyLogin;
+
+  // useEffect(() => {
+  //   const hash = window.location.hash;
+  //   let token = window.localStorage.getItem('token');
+
+  //   if (!token && hash) {
+  //     const hashParams = hash.substring(1).split('&').reduce((acc, current) => {
+  //       const [key, value] = current.split('=');
+  //       acc[key] = value;
+  //       return acc;
+  //     }, {});
+      
+  //     token = hashParams.access_token;
+  //     window.localStorage.setItem('token', token);
+  //     window.location.hash = '';
+  //   }
+  //   if (token) {
+  //     fetchUserData(token);
+  //   } else {
+  //     authenticate(clientId, redirectUri);
+  //   }
+  // }, []);
+
+  // const fetchUserData = async (token) => {
+  //   try {
+  //     const response = await fetch('https://api.spotify.com/v1/me', {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     });
+  //     const data = await response.json();
+  //     window.localStorage.setItem('userData', JSON.stringify(data));
+  //     navigate('/', { state: { userData: data } });
+  //   } catch (error) {
+  //     console.error('Error fetching user data:', error);
+  //   }
+  // };

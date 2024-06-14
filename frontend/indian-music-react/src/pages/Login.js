@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Login ({ LoggedIn, setLoggedIn, email, setEmail}) {
+function Login ({ LoggedIn, setLoggedIn, email, setEmail, username, setUsername}) {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -10,6 +10,8 @@ function Login ({ LoggedIn, setLoggedIn, email, setEmail}) {
     const onButtonClick = () => {
         if (email && password) {
             setLoggedIn(true);
+            const temp = email.split('@')[0];
+            //setUsername(temp);
             navigate('/');
         }
     }
@@ -24,7 +26,8 @@ function Login ({ LoggedIn, setLoggedIn, email, setEmail}) {
                 <input 
                     value={email}
                     placeholder="Email: "
-                    onChange={(email_in) => setEmail(email_in.target.value)}
+                    onChange={(email_in) => setEmail(email_in.target.value)
+                    }
                     className={'inputBox'}
                 />
                 <label className="errorLabel">{emailError}</label>
